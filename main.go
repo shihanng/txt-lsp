@@ -2,16 +2,24 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"os"
 
 	"github.com/cockroachdb/errors"
+	lsp "github.com/sourcegraph/go-lsp"
 	"github.com/sourcegraph/jsonrpc2"
 )
 
-var errNotImplemented = errors.New("not implemented")
+func handle(_ context.Context, _ *jsonrpc2.Conn, req *jsonrpc2.Request) (result interface{}, err error) {
+	switch req.Method { //nolint:gocritic
+	case "initialize":
+		return lsp.InitializeResult{}, nil
+	}
 
-func handle(ctx context.Context, conn *jsonrpc2.Conn, req *jsonrpc2.Request) (result interface{}, err error) {
-	return nil, errNotImplemented
+	return nil, &jsonrpc2.Error{
+		Code:    jsonrpc2.CodeMethodNotFound,
+		Message: fmt.Sprintf("method not supported: %s", req.Method),
+	}
 }
 
 func main() {
