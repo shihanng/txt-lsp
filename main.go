@@ -13,7 +13,29 @@ import (
 func handle(_ context.Context, _ *jsonrpc2.Conn, req *jsonrpc2.Request) (interface{}, error) {
 	switch req.Method {
 	case "initialize":
-		return lsp.InitializeResult{}, nil
+		return lsp.InitializeResult{
+			Capabilities: lsp.ServerCapabilities{
+				CompletionProvider: &lsp.CompletionOptions{},
+			},
+		}, nil
+	case "textDocument/completion":
+		return lsp.CompletionList{
+			IsIncomplete: false,
+			Items: []lsp.CompletionItem{
+				{Label: "Johor Johor (Johor Bahru)"},
+				{Label: "Kedah Kedah (Alor Setar)"},
+				{Label: "Kelantan Kelantan (Kota Bharu)"},
+				{Label: "Malacca Malacca (Malacca City)"},
+				{Label: "Negeri Sembilan Negeri Sembilan (Seremban)"},
+				{Label: "Pahang Pahang (Kuantan)"},
+				{Label: "Penang Penang (George Town)"},
+				{Label: "Perak Perak (Ipoh)"},
+				{Label: "Perlis Perlis (Kangar)"},
+				{Label: "Selangor Selangor (Shah Alam)"},
+				{Label: "Sabah Sabah (Kota Kinabalu)"},
+				{Label: "Sarawak Sarawak (Kuching)"},
+			},
+		}, nil
 	case "initialized":
 		return nil, nil //nolint:nilnil
 	}
