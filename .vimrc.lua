@@ -5,7 +5,7 @@ if not configs.foo_lsp then
 	configs.foo_lsp = {
 		default_config = {
 			cmd = { "/home/neovim/lua-language-server/run.sh" },
-			filetypes = { "txt" },
+			filetypes = { "text" },
 			root_dir = function(fname)
 				return lspconfig.util.find_git_ancestor(fname)
 			end,
