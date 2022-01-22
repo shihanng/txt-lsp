@@ -15,3 +15,5 @@ if not configs.foo_lsp then
 end
 
 lspconfig.foo_lsp.setup({})
+
+vim.lsp.set_log_level("debug")

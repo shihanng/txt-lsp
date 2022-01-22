@@ -15,3 +15,9 @@ pre-commit install
 ### Interacting with LSP client
 
 [.vimrc.lua](./.vimrc.lua) shows how to use the language server with the Neovim LSP client.
+
+Use the following to access the client-side logs.
+
+```
+tail $HOME/.cache/nvim/lsp.log
+```
