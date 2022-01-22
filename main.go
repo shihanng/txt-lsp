@@ -10,10 +10,12 @@ import (
 	"github.com/sourcegraph/jsonrpc2"
 )
 
-func handle(_ context.Context, _ *jsonrpc2.Conn, req *jsonrpc2.Request) (result interface{}, err error) {
-	switch req.Method { //nolint:gocritic
+func handle(_ context.Context, _ *jsonrpc2.Conn, req *jsonrpc2.Request) (interface{}, error) {
+	switch req.Method {
 	case "initialize":
 		return lsp.InitializeResult{}, nil
+	case "initialized":
+		return nil, nil //nolint:nilnil
 	}
 
 	return nil, &jsonrpc2.Error{
